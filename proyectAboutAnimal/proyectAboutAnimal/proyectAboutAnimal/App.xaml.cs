@@ -29,5 +29,14 @@ namespace proyectAboutAnimal
             containerRegistry.RegisterForNavigation<NavigationPage>(Config.navigation);
             containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(Config.main);
         }
+
+        //protected override async void OnStart()
+        //{
+        //    base.OnStart();
+
+        //    var service = new FactDogsService();
+
+        //    var facts = await service.GetFactDogs();
+        //}
     }
 }

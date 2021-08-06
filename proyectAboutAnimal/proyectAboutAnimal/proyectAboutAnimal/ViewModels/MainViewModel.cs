@@ -1,19 +1,23 @@
-﻿using proyectAboutAnimal.Services;
+﻿using proyectAboutAnimal.Models;
+using proyectAboutAnimal.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace proyectAboutAnimal.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
         public string Nombre { get; set; } = "Jose Ramon";
 
-        public ObservableCollection<char> facts { get; } = new ObservableCollection<char>();
+        public ObservableCollection<FactDogs> Facts { get; set; }
 
         private IfactDogsService ifactDogs;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public MainViewModel(IfactDogsService dogsService)
         {
@@ -26,11 +30,7 @@ namespace proyectAboutAnimal.ViewModels
             var factInformation = await ifactDogs.GetFactDogs();
             if (factInformation != null)
             {
-                //var datos = factInformation.Fact;
-                foreach (var c in factInformation.Fact)
-                {
-                    facts.Add(c);
-                }
+                Facts = new ObservableCollection<FactDogs>(factInformation);
 
             }
             else

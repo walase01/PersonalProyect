@@ -8,6 +8,6 @@ namespace proyectAboutAnimal.Services
 {
     public interface IfactDogsService
     {
-        Task<FactDogs> GetFactDogs();
+        Task<IEnumerable<FactDogs>> GetFactDogs();
     }
 }
