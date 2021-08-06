@@ -1,4 +1,5 @@
-﻿using proyectAboutAnimal.Services;
+﻿using proyectAboutAnimal.Models;
+using proyectAboutAnimal.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,30 +8,30 @@ using System.Threading.Tasks;
 
 namespace proyectAboutAnimal.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : BaseViewModel
     {
         public string Nombre { get; set; } = "Jose Ramon";
 
-        public ObservableCollection<char> facts { get; } = new ObservableCollection<char>();
+        public ObservableCollection<FactDogs> facts { get; set; } 
 
-        private IfactDogsService ifactDogs;
+        protected IfactDogsService IfactDogs;
 
-        public MainViewModel(IfactDogsService dogsService)
-        {
-            this.ifactDogs = dogsService;
+        public MainViewModel(IfactDogsService ifactDogs) : base(ifactDogs)
+        {          
             LoadFact();
+            this.IfactDogs = ifactDogs;
+            
         }
 
         async Task LoadFact()
         {
-            var factInformation = await ifactDogs.GetFactDogs();
+
+            var factInformation = await IfactDogs.GetFactDogs();
+
             if (factInformation != null)
             {
-                //var datos = factInformation.Fact;
-                foreach (var c in factInformation.Fact)
-                {
-                    facts.Add(c);
-                }
+
+                facts = new ObservableCollection<FactDogs>(factInformation);
 
             }
             else

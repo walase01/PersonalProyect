@@ -5,7 +5,7 @@
              Title="{Binding Nombre}">
 
     <StackLayout>
-        <Picker ItemsSource="{Binding datos.Fact}" ></Picker>
+        <Picker ItemsSource="{Binding facts.Fact}" ></Picker>
         <Picker ItemsSource="{Binding facts}"></Picker>
     </StackLayout>
 

@@ -10,9 +10,9 @@ namespace proyectAboutAnimal.Services
 {
     public class FactDogsService : IfactDogsService
     {
-        public async Task<FactDogs> GetFactDogs()
+        public async Task<IEnumerable<FactDogs>> GetFactDogs()
         {
-            FactDogs factDogs = null;
+            IEnumerable<FactDogs> factDogs = null;
             HttpClient client = new HttpClient();
 
             var getfactDogs = await client.GetAsync(NavigationConstant.getallfect);
@@ -20,8 +20,7 @@ namespace proyectAboutAnimal.Services
             if (getfactDogs.IsSuccessStatusCode)
             {
                 var factDog = await getfactDogs.Content.ReadAsStringAsync();
-                //factDogs = JsonConvert.DeserializeObject<IEnumerable<FactDogs>>(factDog);
-                factDogs = (FactDogs)JsonConvert.DeserializeObject<IEnumerable<FactDogs>>(factDog);
+                factDogs = JsonConvert.DeserializeObject<IEnumerable<FactDogs>>(factDog);
             }
 
             return factDogs;

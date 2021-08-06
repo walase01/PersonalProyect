@@ -9,5 +9,10 @@ namespace proyectAboutAnimal.Models
     {
         [JsonPropertyName("fact")]
         public string Fact { get; set; }
+
+        public override string ToString()
+        {
+            return Fact;
+        }
     }
 }
