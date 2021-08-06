@@ -1,28 +1,33 @@
-﻿using System;
+﻿using Prism;
+using Prism.Ioc;
+using Prism.Unity;
+using proyectAboutAnimal.Services;
+using proyectAboutAnimal.ViewModels;
+using proyectAboutAnimal.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace proyectAboutAnimal
 {
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
-        public App()
+        public App(IPlatformInitializer Initializer): base(Initializer)
+        {
+        }
+
+        protected async override void OnInitialized()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            await NavigationService.NavigateAsync($"{Config.navigation}/{Config.main}");
         }
 
-        protected override void OnStart()
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-        }
+            containerRegistry.Register<IfactDogsService, FactDogsService>();
 
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
+            containerRegistry.RegisterForNavigation<NavigationPage>(Config.navigation);
+            containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(Config.main);
         }
     }
 }
