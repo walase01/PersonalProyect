@@ -5,7 +5,8 @@
              Title="{Binding Nombre}">
 
     <StackLayout>
-        <Picker ItemsSource="{Binding Facts}"></Picker>
+        <Picker ItemsSource="{Binding facts.Fact}" ></Picker>
+        <Picker ItemsSource="{Binding facts}"></Picker>
     </StackLayout>
 
 </ContentPage>

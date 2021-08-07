@@ -9,28 +9,30 @@ using System.Threading.Tasks;
 
 namespace proyectAboutAnimal.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel
     {
         public string Nombre { get; set; } = "Jose Ramon";
 
-        public ObservableCollection<FactDogs> Facts { get; set; }
+        public ObservableCollection<FactDogs> facts { get; set; } 
 
-        private IfactDogsService ifactDogs;
+        protected IfactDogsService IfactDogs;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public MainViewModel(IfactDogsService dogsService)
-        {
-            this.ifactDogs = dogsService;
+        public MainViewModel(IfactDogsService ifactDogs) : base(ifactDogs)
+        {          
             LoadFact();
+            this.IfactDogs = ifactDogs;
+            
         }
 
         async Task LoadFact()
         {
-            var factInformation = await ifactDogs.GetFactDogs();
+
+            var factInformation = await IfactDogs.GetFactDogs();
+
             if (factInformation != null)
             {
-                Facts = new ObservableCollection<FactDogs>(factInformation);
+
+                facts = new ObservableCollection<FactDogs>(factInformation);
 
             }
             else

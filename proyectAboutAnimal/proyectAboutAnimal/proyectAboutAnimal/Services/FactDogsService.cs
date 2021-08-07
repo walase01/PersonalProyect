@@ -20,7 +20,6 @@ namespace proyectAboutAnimal.Services
             if (getfactDogs.IsSuccessStatusCode)
             {
                 var factDog = await getfactDogs.Content.ReadAsStringAsync();
-                //factDogs = JsonConvert.DeserializeObject<IEnumerable<FactDogs>>(factDog);
                 factDogs = JsonConvert.DeserializeObject<IEnumerable<FactDogs>>(factDog);
             }
 
