@@ -13,26 +13,22 @@ namespace proyectAboutAnimal.ViewModels
     {
         public string Nombre { get; set; } = "Jose Ramon";
 
-        public ObservableCollection<FactDogs> facts { get; set; } 
-
-        protected IfactDogsService IfactDogs;
+        public ObservableCollection<FactDogs> Facts { get; set; } 
 
         public MainViewModel(IfactDogsService ifactDogs) : base(ifactDogs)
         {          
             LoadFact();
-            this.IfactDogs = ifactDogs;
-            
         }
 
         async Task LoadFact()
         {
 
-            var factInformation = await IfactDogs.GetFactDogs();
+            var factInformation = await dogsService.GetFactDogs();
 
             if (factInformation != null)
             {
 
-                facts = new ObservableCollection<FactDogs>(factInformation);
+                Facts = new ObservableCollection<FactDogs>(factInformation);
 
             }
             else
